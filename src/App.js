@@ -1,6 +1,6 @@
 import './App.css';
 
-import Basic from './components/form/form';
+import Form from './components/form/form';
 
 function App() {
   return (
@@ -9,9 +9,7 @@ function App() {
         <h1>A11y audit tool</h1>
         <nav></nav>
       </header>
-      <main className="main">
-      <Basic />
-      </main>
+      <Form />
       <footer>
         footer
       </footer>

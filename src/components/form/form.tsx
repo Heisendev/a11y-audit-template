@@ -22,9 +22,18 @@ const Form = (): JSX.Element => {
 
   const [isPdfDisplayed, displayPDF] = useState(false);
   const [formValues, stateValues] = useState({});
+  const [criteriaLevels, setCriteriaLevels] = useState(['A', 'AA', 'AAA'])
+
+  const handleLevels = (level: string) => {
+    if (criteriaLevels.includes(level)) {
+      setCriteriaLevels(criteriaLevels.filter(crit => crit !== level));
+    } else {
+      setCriteriaLevels([...criteriaLevels, level]);
+      }
+  }
 
   return (
-    <div>
+    <main className="main">
       { isPdfDisplayed ?
           <PDFDownloadLink document={<MyDocument values={formValues} />} fileName="somename.pdf">
             {({ blob, url, loading, error }) =>
@@ -32,88 +41,112 @@ const Form = (): JSX.Element => {
             }
           </PDFDownloadLink>
         :
-        <Formik
-          initialValues={{} as { [s: string]: unknown; }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              console.log(values);
-              stateValues(values);
-              displayPDF(true);
-              setSubmitting(false);
-            }, 400);
-          }}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              {wcag.map(wcag => {
-                return (
-                  <div key={wcag.ref_id}>
-                    <h2>{wcag.title}</h2>
-                    {
-                      wcag.guidelines.map(guideline => {
-                        return (
-                          <div key={guideline.ref_id} className="guideline">
-                            <h3>{guideline.ref_id} {guideline.title}</h3>
-                            {guideline.success_criteria.map((criteria, index, criterias) => {
-                              const critOpen = criteriaOpened.includes(`more-${criteria.ref_id}`)
-                              return (
-                                <div key={criteria.ref_id}>
-                                  <h4 id={`criteria-${criteria.ref_id}`}>{`${criteria.ref_id}: Level ${criteria.level} - ${criteria.title}`}</h4>
-                                  <div className="criteria-description">{criteria.description}</div>
-                                  <div role="group" aria-labelledby={`criteria-${criteria.ref_id}`}>
-                                    <label>
-                                      <Field type="radio" name={normalizeWcagId(criteria.ref_id)} value="success" />
-                                      Success
-                                    </label>
-                                    <label>
-                                      <Field type="radio" name={normalizeWcagId(criteria.ref_id)} value="failed" />
-                                        Failed
-                                    </label>
-                                    <div>
-                                      <label htmlFor={`comment-${normalizeWcagId(criteria.ref_id)}`}>Comment</label>
-                                        <Field
-                                          type="textarea"
-                                          name={`comment-${normalizeWcagId(criteria.ref_id)}`}
-                                          id={`comment-${normalizeWcagId(criteria.ref_id)}`} />
+        <div>
+          <fieldset className="wcag-filter">
+            <legend>
+              WCAG Level filter
+            </legend>
+            <label>
+              <input type="checkbox" id="A" name="criteria-level" checked={criteriaLevels.includes('A')} onClick={() => handleLevels('A')} />
+              A
+            </label>
+            <label>
+              <input type="checkbox" id="AA" name="criteria-level" checked={criteriaLevels.includes('AA')} onClick={() => handleLevels('AA')} />
+              AA
+            </label>
+            <label>
+              <input type="checkbox" id="AAA" name="criteria-level" checked={criteriaLevels.includes('AAA')} onClick={() => handleLevels('AAA')} />
+              AAA
+            </label>
+          </fieldset>
+
+          <Formik
+            initialValues={{} as { [s: string]: unknown; }}
+            onSubmit={(values, { setSubmitting }) => {
+              setTimeout(() => {
+                stateValues(values);
+                displayPDF(true);
+                setSubmitting(false);
+              }, 400);
+            }}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                {wcag.map(wcag => {
+                  return (
+                    <div key={wcag.ref_id}>
+                      <h2>{wcag.title}</h2>
+                      {
+                        wcag.guidelines.map(guideline => {
+                          return (
+                            <div key={guideline.ref_id} className="guideline">
+                              <h3>{guideline.ref_id} {guideline.title}</h3>
+                              {guideline.success_criteria.map((criteria, index, criterias) => {
+                                if (criteriaLevels.includes(criteria.level)) {
+                                  const critOpen = criteriaOpened.includes(`more-${criteria.ref_id}`)
+                                  return (
+                                    <div key={criteria.ref_id}>
+                                      <h4 id={`criteria-${criteria.ref_id}`}>{`${criteria.ref_id}: Level ${criteria.level} - ${criteria.title}`}</h4>
+                                      <div className="criteria-description">{criteria.description}</div>
+                                      <div role="group" aria-labelledby={`criteria-${criteria.ref_id}`}>
+                                        <label>
+                                          <Field type="radio" name={normalizeWcagId(criteria.ref_id)} value="success" />
+                                          Success
+                                        </label>
+                                        <label>
+                                          <Field type="radio" name={normalizeWcagId(criteria.ref_id)} value="failed" />
+                                            Failed
+                                        </label>
+                                        <div>
+                                          <label htmlFor={`comment-${normalizeWcagId(criteria.ref_id)}`}>Comment</label>
+                                            <Field
+                                              type="textarea"
+                                              name={`comment-${normalizeWcagId(criteria.ref_id)}`}
+                                              id={`comment-${normalizeWcagId(criteria.ref_id)}`} />
+                                        </div>
+                                      </div>
+                                      <button
+                                        type="button"
+                                        aria-controls={`more-${criteria.ref_id}`}
+                                        aria-expanded={critOpen ? 'true' : 'false'}
+                                        className="accordion-header"
+                                        onClick={() => toggleCriteria(`more-${criteria.ref_id}`)}> See how to acheive criteria </button>
+                                      <div id={`more-${criteria.ref_id}`} role="region" className="accordion-panel" hidden={critOpen ? false : true}>
+                                        {criteria.references.map((ref: { url?: string | undefined; title: string; }, index: number) => {
+                                          return ref.url ? (<div key={index}><a href={ref.url} target="_blank" rel="noreferrer">{ref.title}</a></div>) : null;
+                                        })}
+                                      </div>
+                                      {(index !== criterias.length - 1) && <hr />}
                                     </div>
-                                  </div>
-                                  <button
-                                    type="button"
-                                    aria-controls={`more-${criteria.ref_id}`}
-                                    aria-expanded={critOpen ? 'true' : 'false'}
-                                    className="accordion-header"
-                                    onClick={() => toggleCriteria(`more-${criteria.ref_id}`)}> See how to acheive criteria </button>
-                                  <div id={`more-${criteria.ref_id}`} role="region" className="accordion-panel" hidden={critOpen ? false : true}>
-                                    {criteria.references.map((ref: { url?: string | undefined; title: string; }, index: number) => {
-                                      return (<div key={index}><a href={ref?.url} target="_blank" rel="noreferrer">{ref?.title}</a></div>)
-                                    })}
-                                  </div>
-                                  {(index !== criterias.length - 1) && <hr />}
-                                </div>
-                              )
-                            })}
-                          </div>
-                        )
-                      })
-                    }
-                  </div>
-                )
-              })}
-              <button type="submit" disabled={isSubmitting}>
-                Generate report PDF
-          </button>
-            </form>
-          )}
-        </Formik>}
-    </div>
+                                  )
+                                } else {
+                                  return null;
+                                }
+                                
+                              })}
+                            </div>
+                          )
+                        })
+                      }
+                    </div>
+                  )
+                })}
+                <button type="submit" disabled={isSubmitting}>
+                  Generate report PDF
+            </button>
+              </form>
+            )}
+          </Formik>
+        </div>}
+    </main>
   )
 };
 
