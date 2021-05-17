@@ -47,15 +47,15 @@ const Form = (): JSX.Element => {
               WCAG Level filter
             </legend>
             <label>
-              <input type="checkbox" id="A" name="criteria-level" checked={criteriaLevels.includes('A')} onClick={() => handleLevels('A')} />
+              <input type="checkbox" id="A" name="criteria-level" checked={criteriaLevels.includes('A')} onChange={() => handleLevels('A')} />
               A
             </label>
             <label>
-              <input type="checkbox" id="AA" name="criteria-level" checked={criteriaLevels.includes('AA')} onClick={() => handleLevels('AA')} />
+              <input type="checkbox" id="AA" name="criteria-level" checked={criteriaLevels.includes('AA')} onChange={() => handleLevels('AA')} />
               AA
             </label>
             <label>
-              <input type="checkbox" id="AAA" name="criteria-level" checked={criteriaLevels.includes('AAA')} onClick={() => handleLevels('AAA')} />
+              <input type="checkbox" id="AAA" name="criteria-level" checked={criteriaLevels.includes('AAA')} onChange={() => handleLevels('AAA')} />
               AAA
             </label>
           </fieldset>
@@ -84,6 +84,7 @@ const Form = (): JSX.Element => {
                   return (
                     <div key={wcag.ref_id}>
                       <h2>{wcag.title}</h2>
+                      <p>{wcag.description}</p>
                       {
                         wcag.guidelines.map(guideline => {
                           return (
@@ -105,13 +106,16 @@ const Form = (): JSX.Element => {
                                           <Field type="radio" name={normalizeWcagId(criteria.ref_id)} value="failed" />
                                             Failed
                                         </label>
-                                        <div>
-                                          <label htmlFor={`comment-${normalizeWcagId(criteria.ref_id)}`}>Comment</label>
-                                            <Field
-                                              type="textarea"
+                                        {values[normalizeWcagId(criteria.ref_id)] === "failed" &&
+                                          <div className="margin-bottom">
+                                            <label className="block" htmlFor={`comment-${normalizeWcagId(criteria.ref_id)}`}>Comment : </label>
+                                          <Field
+                                              className="full-width"
+                                              as="textarea"
                                               name={`comment-${normalizeWcagId(criteria.ref_id)}`}
                                               id={`comment-${normalizeWcagId(criteria.ref_id)}`} />
-                                        </div>
+                                          </div>
+                                        }
                                       </div>
                                       <button
                                         type="button"
