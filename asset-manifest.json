@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/a11y-audit-template/static/css/main.1150f9e7.chunk.css",
-    "main.js": "/a11y-audit-template/static/js/main.9fd5945e.chunk.js",
-    "main.js.map": "/a11y-audit-template/static/js/main.9fd5945e.chunk.js.map",
-    "runtime-main.js": "/a11y-audit-template/static/js/runtime-main.79f021b6.js",
-    "runtime-main.js.map": "/a11y-audit-template/static/js/runtime-main.79f021b6.js.map",
-    "static/js/2.e37e3bd4.chunk.js": "/a11y-audit-template/static/js/2.e37e3bd4.chunk.js",
-    "static/js/2.e37e3bd4.chunk.js.map": "/a11y-audit-template/static/js/2.e37e3bd4.chunk.js.map",
-    "static/js/3.4b865a67.chunk.js": "/a11y-audit-template/static/js/3.4b865a67.chunk.js",
-    "static/js/3.4b865a67.chunk.js.map": "/a11y-audit-template/static/js/3.4b865a67.chunk.js.map",
+    "main.css": "/a11y-audit-template/static/css/main.c57beddd.chunk.css",
+    "main.js": "/a11y-audit-template/static/js/main.af845262.chunk.js",
+    "main.js.map": "/a11y-audit-template/static/js/main.af845262.chunk.js.map",
+    "runtime-main.js": "/a11y-audit-template/static/js/runtime-main.0f4a76ef.js",
+    "runtime-main.js.map": "/a11y-audit-template/static/js/runtime-main.0f4a76ef.js.map",
+    "static/js/2.0d6e8eb6.chunk.js": "/a11y-audit-template/static/js/2.0d6e8eb6.chunk.js",
+    "static/js/2.0d6e8eb6.chunk.js.map": "/a11y-audit-template/static/js/2.0d6e8eb6.chunk.js.map",
+    "static/js/3.622e101b.chunk.js": "/a11y-audit-template/static/js/3.622e101b.chunk.js",
+    "static/js/3.622e101b.chunk.js.map": "/a11y-audit-template/static/js/3.622e101b.chunk.js.map",
     "index.html": "/a11y-audit-template/index.html",
-    "static/css/main.1150f9e7.chunk.css.map": "/a11y-audit-template/static/css/main.1150f9e7.chunk.css.map",
-    "static/js/2.e37e3bd4.chunk.js.LICENSE.txt": "/a11y-audit-template/static/js/2.e37e3bd4.chunk.js.LICENSE.txt"
+    "static/css/main.c57beddd.chunk.css.map": "/a11y-audit-template/static/css/main.c57beddd.chunk.css.map",
+    "static/js/2.0d6e8eb6.chunk.js.LICENSE.txt": "/a11y-audit-template/static/js/2.0d6e8eb6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.79f021b6.js",
-    "static/js/2.e37e3bd4.chunk.js",
-    "static/css/main.1150f9e7.chunk.css",
-    "static/js/main.9fd5945e.chunk.js"
+    "static/js/runtime-main.0f4a76ef.js",
+    "static/js/2.0d6e8eb6.chunk.js",
+    "static/css/main.c57beddd.chunk.css",
+    "static/js/main.af845262.chunk.js"
   ]
 }
