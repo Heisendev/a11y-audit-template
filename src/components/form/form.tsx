@@ -77,15 +77,13 @@ const Form = (): JSX.Element => {
                                       <Field type="radio" name={normalizeWcagId(criteria.ref_id)} value="failed" />
                                         Failed
                                     </label>
-                                    {values[normalizeWcagId(criteria.ref_id)] === "failed" && 
-                                      <div>
-                                        <label htmlFor={`comment-${normalizeWcagId(criteria.ref_id)}`}></label>
+                                    <div>
+                                      <label htmlFor={`comment-${normalizeWcagId(criteria.ref_id)}`}>Comment</label>
                                         <Field
                                           type="textarea"
                                           name={`comment-${normalizeWcagId(criteria.ref_id)}`}
                                           id={`comment-${normalizeWcagId(criteria.ref_id)}`} />
                                     </div>
-                                    }
                                   </div>
                                   <button
                                     type="button"
