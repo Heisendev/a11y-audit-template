@@ -31,14 +31,15 @@
 }
 
 .accordion-header {
-  border-style: none;
+  border: 1px solid;
+  border-radius: 5px;
   background: none;
   color: hsl(0, 0%, 13%);
   display: block;
   font-size: 1rem;
   font-weight: normal;
   margin: 0;
-  padding: 1em 1.5em;
+  padding: 8px;
   position: relative;
   text-align: left;
 }
