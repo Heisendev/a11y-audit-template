@@ -1,8 +1,8 @@
-const normalizeWcagId = (id: string) => {
-  return id.replace(/\./g, '_');
-}
+const normalizeWcagId = (id: string): string => {
+    return id.replace(/\./g, '_');
+};
 
-const unNormalizeWcagId = (id: string) => {
-  return id.replace(/\_/g, '.');
-}
-export {normalizeWcagId, unNormalizeWcagId}
+const unNormalizeWcagId = (id: string): string => {
+    return id.replace(/_/g, '.');
+};
+export { normalizeWcagId, unNormalizeWcagId };
