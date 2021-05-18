@@ -3,6 +3,7 @@ import { Field, Formik } from "formik";
 import wcag from 'wcag-as-json/src/wcag.json';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import MyDocument from '../pdf/pdf';
+import { normalizeWcagId } from '../../helpers/helpers';
 
 const Form = (): JSX.Element => {
 
@@ -15,10 +16,6 @@ const Form = (): JSX.Element => {
       openCriteria([...criteriaOpened, criteriaId]);
     }
   };
-
-  const normalizeWcagId = (id: string) => {
-    return id.replace(/\./g, '_');
-  }
 
   const [isPdfDisplayed, displayPDF] = useState(false);
   const [formValues, stateValues] = useState({});
@@ -108,12 +105,12 @@ const Form = (): JSX.Element => {
                                         </label>
                                         {values[normalizeWcagId(criteria.ref_id)] === "failed" &&
                                           <div className="margin-bottom">
-                                            <label className="block" htmlFor={`comment-${normalizeWcagId(criteria.ref_id)}`}>Comment : </label>
+                                            <label className="block" htmlFor={`${normalizeWcagId(criteria.ref_id)}-comment`}>Comment : </label>
                                           <Field
                                               className="full-width"
                                               as="textarea"
-                                              name={`comment-${normalizeWcagId(criteria.ref_id)}`}
-                                              id={`comment-${normalizeWcagId(criteria.ref_id)}`} />
+                                              name={`${normalizeWcagId(criteria.ref_id)}-comment`}
+                                              id={`${normalizeWcagId(criteria.ref_id)}-comment`} />
                                           </div>
                                         }
                                       </div>

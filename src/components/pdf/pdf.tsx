@@ -1,4 +1,5 @@
 import React from 'react';
+import wcag from 'wcag-as-json/src/wcag.json';
 import { Page, Text, Font, Document, StyleSheet } from '@react-pdf/renderer';
 
 Font.register({
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     color: 'grey',
   },
 });
-// Create Document Component
+
 const MyDocument = ( props: { values: { [s: string]: unknown; } | ArrayLike<unknown>; }) => {
   
   return (
