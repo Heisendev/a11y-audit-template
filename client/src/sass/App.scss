@@ -1,0 +1,65 @@
+.App {
+  font-family: 'Raleway', sans-serif;
+}
+
+.main {
+  padding: 16px;
+}
+
+.App-header {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  padding: 16px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.accordion-header {
+  border: 1px solid;
+  border-radius: 5px;
+  background: none;
+  color: hsl(0, 0%, 13%);
+  display: block;
+  font-size: 1rem;
+  font-weight: normal;
+  margin: 0;
+  padding: 8px;
+  position: relative;
+  text-align: left;
+}
+
+
+.accordion-panel {
+  margin: 0;
+  padding: 1em 1.5em;
+}
+
+.accordion-panel[hidden] {
+  display: none;
+}
+
+.guideline {
+  border: 1px solid black;
+  margin-bottom: 8px;
+  padding: 0 16px 16px;
+}
+
+.criteria-description {
+  margin-bottom: 8px;
+}
