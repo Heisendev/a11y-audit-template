@@ -2,6 +2,7 @@ package models
 
 type Audit struct {
 	ID     uint   `json:"id"`
+	Name   string `json:"name"`
 	Values string `json:"values"`
 }
 
