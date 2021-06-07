@@ -59,6 +59,11 @@ services:
             - "traefik.http.routers.api.rule=Host(`api.local`)"
             - "traefik.http.routers.api.entrypoints=websecure"
             - "traefik.http.services.api.loadbalancer.server.port=4000"
+            - "traefik.http.middlewares.testheader.headers.accesscontrolalloworigin=*"
+            - "traefik.http.middlewares.testheader.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST"
+            - "traefik.http.middlewares.testheader.headers.accesscontrolallowheaders=Accept,Content-Type,Content-Length,Accept-Encoding,X-CSRF-Token,Authorization"
+            - "traefik.http.middlewares.testheader.headers.accesscontrolmaxage=100"
+            - "traefik.http.routers.api.middlewares=testheader"
         command: CompileDaemon --build="go build -o main ./cmd/api" --command=./main
 
     client:
