@@ -8,7 +8,7 @@ const submitHandler = (values: { name: string }) => {
     axios
         .post(`${API_URL}audit`, values)
         .then(() => {
-            document.location.href = `${API_URL}/audits/${values.name}`;
+            document.location.href = `/audits/${values.name}`;
         })
         .catch(() => {
             axios.get(`${API_URL}audits`).then((res) => {

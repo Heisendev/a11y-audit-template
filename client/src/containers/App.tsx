@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Redirect, Route, Switch } from 'react-router-dom';
 
 import Form from '../components/form/form';
 
@@ -10,7 +10,9 @@ const App = (): JSX.Element => {
         <div className="App">
             <header className="App-header">
                 <h1>Accessibility audit tool</h1>
-                <nav></nav>
+                <nav>
+                    <a href="/">home</a>
+                </nav>
             </header>
             <main>
                 <Router>

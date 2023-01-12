@@ -3,7 +3,7 @@ import { Document, Font, Page, StyleSheet, Text } from '@react-pdf/renderer';
 
 Font.register({
     family: 'Raleway',
-    src: 'http://fonts.gstatic.com/s/raleway/v11/2VvSZU2kb4DZwFfRM4fLQPesZW2xOQ-xsNqO47m55DA.ttf',
+    src: 'https://fonts.gstatic.com/s/raleway/v11/2VvSZU2kb4DZwFfRM4fLQPesZW2xOQ-xsNqO47m55DA.ttf',
 });
 // Create styles
 const styles = StyleSheet.create({
